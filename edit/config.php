@@ -19,3 +19,4 @@ tAO/EVZ2Huw01f+vTgkxpi3zu5T7RicnX9vfMu7QOJALWGDRximNn99VUucorLEZ
 9tbC3zi4mYvngqLhfPT7AKhBWFDWKsWrIQAelLaWA26oxkT2rBhmApDA2VOooeP7
 X8YbQxTnSWfG/oSAh5mG5BkCAwEAAQ==
 -----END PUBLIC KEY----- ');
+define('AZURE_BLOB_SAS_URL', 'https://wsadsml5029665853.blob.core.windows.net/ml4all?sp=racwdl&st=2025-05-20T19:56:23Z&se=2025-05-22T03:56:23Z&spr=https&sv=2024-11-04&sr=c&sig=N4AhBNb9VQL4AZKF7cZ4RvJNUFmEcbez2lrOIBlP62Y%3D');

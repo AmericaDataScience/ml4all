@@ -709,9 +709,53 @@
   <script src="assets/countdown/countdown.js"></script>
   <script src="assets/theme/js/script.js"></script>
   <script src="assets/formoid/formoid.min.js"></script>
-  
-  
-  
+  <script src="edit/env.js.php"></script>
+
+
+<script>
+  async function uploadFile() {
+    const fileInput = document.getElementById('fileInput');
+    const file = fileInput.files[0];
+
+    if (!file) {
+      alert("Please select a file.");
+      return;
+    }
+
+    const blobName = encodeURIComponent(file.name);
+    const [baseUrl, sasToken] = window.env.AZURE_BLOB_SAS_URL.split('?');
+    const fullUrl = `${baseUrl}/${blobName}?${sasToken}`;
+
+    try {
+      const response = await fetch(fullUrl, {
+        method: 'PUT',
+        headers: {
+          'x-ms-blob-type': 'BlockBlob',
+          'Content-Type': file.type
+        },
+        body: file
+      });
+
+      if (response.ok) {
+        alert("File uploaded successfully!");
+      } else {
+        const errText = await response.text();
+        console.error("Upload failed:", errText);
+        alert("Upload failed: " + errText);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("An error occurred while uploading the file.");
+    }
+  }
+</script>
+
+<section id="upload-section" class="container mt-5 mb-5">
+  <h3>Upload Your Dataset</h3>
+  <input type="file" id="fileInput" class="form-control mb-3" />
+  <button onclick="uploadFile()" class="btn btn-primary">Upload</button>
+</section>
+
  <div id="scrollToTop" class="scrollToTop mbr-arrow-up"><a style="text-align: center;"><i class="mbr-arrow-up-icon mbr-arrow-up-icon-cm cm-icon cm-icon-smallarrow-up"></i></a></div>
     <input name="animation" type="hidden">
   </body>
